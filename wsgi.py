@@ -1,3 +1,4 @@
+
 from app import current_app as app
 
 if __name__ == "__main__":

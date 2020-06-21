@@ -4,7 +4,9 @@ import os, requests
 from dotenv import load_dotenv
 
 load_dotenv()
-
+"""
+    home page renders the html for SPA
+"""
 @app.route('/')
 def index():
     
@@ -24,7 +26,7 @@ def getStockPrice(stockName):
     #load environment variable from .env file for API_KEY
     
 
-    #IEX API URL to endpoint for single stock price. API key stored in .env file.
+    #IEX API endpoint for single stock price. API key stored in .env file.
     url = "https://sandbox.iexapis.com/stable/stock/{}/price?token=".format(stockName) + os.getenv("API_KEY")
     
     
@@ -43,8 +45,8 @@ def getStockPrice(stockName):
 @app.route('/stockBatchPrice/<stockNames>', methods=["GET"])
 def getStockBatchPrice(stockNames):
 
-    #IEX API URL to endpoint for prices of a batch stocks. API key stored in .env file.
-    #Stock name separated by comma.
+    #IEX API endpoint for prices of a batch stocks. API key stored in .env file.
+    #Stock name separated by comma. (trailing comma ignored)
     url = "https://sandbox.iexapis.com/stable/stock/market/batch?symbols={}&types=price&token=".format(stockNames) + os.getenv("API_KEY")
     try:
         response = requests.get(url = url)
